@@ -12,7 +12,7 @@ namespace OOTPiSP_labs
 
         public PolyLine(Color color, float penWidth) : base(color, penWidth)
         {
-            points[0] = this.StartCoords;
+            points[0] = new Point(0, 0);
             pointCounter = 1;
         }
 
@@ -24,6 +24,11 @@ namespace OOTPiSP_labs
         public override void Paint(Graphics graphics)
         {
             graphics.DrawLines(this.MyPen, points);
+        }
+
+        public override Figure Clone()
+        {
+            return new PolyLine(MyPen.Color, MyPen.Width);
         }
     }
 }

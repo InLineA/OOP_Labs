@@ -30,6 +30,10 @@ namespace OOTPiSP_labs
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Deserealize = new System.Windows.Forms.Button();
+            this.SerealizeBtn = new System.Windows.Forms.Button();
+            this.RedoBtn = new System.Windows.Forms.Button();
+            this.UndoBtn = new System.Windows.Forms.Button();
             this.WidthLbl = new System.Windows.Forms.Label();
             this.WidthBar = new System.Windows.Forms.TrackBar();
             this.IsFillBtn = new System.Windows.Forms.CheckBox();
@@ -40,10 +44,7 @@ namespace OOTPiSP_labs
             this.RectangleButton = new System.Windows.Forms.Button();
             this.PolyLineButton = new System.Windows.Forms.Button();
             this.LineButton = new System.Windows.Forms.Button();
-            this.UndoBtn = new System.Windows.Forms.Button();
-            this.RedoBtn = new System.Windows.Forms.Button();
-            this.SerealizeBtn = new System.Windows.Forms.Button();
-            this.Deserealize = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WidthBar)).BeginInit();
             this.SuspendLayout();
@@ -69,6 +70,42 @@ namespace OOTPiSP_labs
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(183, 460);
             this.panel1.TabIndex = 0;
+            // 
+            // Deserealize
+            // 
+            this.Deserealize.Location = new System.Drawing.Point(41, 400);
+            this.Deserealize.Name = "Deserealize";
+            this.Deserealize.Size = new System.Drawing.Size(104, 50);
+            this.Deserealize.TabIndex = 15;
+            this.Deserealize.Text = "Deserealize";
+            this.Deserealize.UseVisualStyleBackColor = true;
+            // 
+            // SerealizeBtn
+            // 
+            this.SerealizeBtn.Location = new System.Drawing.Point(39, 344);
+            this.SerealizeBtn.Name = "SerealizeBtn";
+            this.SerealizeBtn.Size = new System.Drawing.Size(104, 50);
+            this.SerealizeBtn.TabIndex = 14;
+            this.SerealizeBtn.Text = "Serealize";
+            this.SerealizeBtn.UseVisualStyleBackColor = true;
+            // 
+            // RedoBtn
+            // 
+            this.RedoBtn.Location = new System.Drawing.Point(93, 288);
+            this.RedoBtn.Name = "RedoBtn";
+            this.RedoBtn.Size = new System.Drawing.Size(50, 50);
+            this.RedoBtn.TabIndex = 13;
+            this.RedoBtn.Text = "Redo";
+            this.RedoBtn.UseVisualStyleBackColor = true;
+            // 
+            // UndoBtn
+            // 
+            this.UndoBtn.Location = new System.Drawing.Point(39, 288);
+            this.UndoBtn.Name = "UndoBtn";
+            this.UndoBtn.Size = new System.Drawing.Size(50, 50);
+            this.UndoBtn.TabIndex = 12;
+            this.UndoBtn.Text = "Undo";
+            this.UndoBtn.UseVisualStyleBackColor = true;
             // 
             // WidthLbl
             // 
@@ -98,6 +135,7 @@ namespace OOTPiSP_labs
             this.IsFillBtn.TabIndex = 9;
             this.IsFillBtn.Text = "Filled";
             this.IsFillBtn.UseVisualStyleBackColor = true;
+            this.IsFillBtn.CheckedChanged += new System.EventHandler(this.IsFillBtn_CheckedChanged);
             // 
             // Color2Btn
             // 
@@ -107,6 +145,7 @@ namespace OOTPiSP_labs
             this.Color2Btn.TabIndex = 8;
             this.Color2Btn.Text = "Color 2";
             this.Color2Btn.UseVisualStyleBackColor = true;
+            this.Color2Btn.Click += new System.EventHandler(this.Color2Btn_Click);
             // 
             // Color1Btn
             // 
@@ -116,6 +155,7 @@ namespace OOTPiSP_labs
             this.Color1Btn.TabIndex = 7;
             this.Color1Btn.Text = "Color 1";
             this.Color1Btn.UseVisualStyleBackColor = true;
+            this.Color1Btn.Click += new System.EventHandler(this.Color1Btn_Click);
             // 
             // PolygonButton
             // 
@@ -125,6 +165,7 @@ namespace OOTPiSP_labs
             this.PolygonButton.TabIndex = 5;
             this.PolygonButton.Text = "Polygon";
             this.PolygonButton.UseVisualStyleBackColor = true;
+            this.PolygonButton.Click += new System.EventHandler(this.PolygonButton_Click);
             // 
             // EllipseButton
             // 
@@ -134,6 +175,7 @@ namespace OOTPiSP_labs
             this.EllipseButton.TabIndex = 4;
             this.EllipseButton.Text = "Ellipse";
             this.EllipseButton.UseVisualStyleBackColor = true;
+            this.EllipseButton.Click += new System.EventHandler(this.EllipseButton_Click);
             // 
             // RectangleButton
             // 
@@ -143,6 +185,7 @@ namespace OOTPiSP_labs
             this.RectangleButton.TabIndex = 3;
             this.RectangleButton.Text = "Rectangle";
             this.RectangleButton.UseVisualStyleBackColor = true;
+            this.RectangleButton.Click += new System.EventHandler(this.RectangleButton_Click);
             // 
             // PolyLineButton
             // 
@@ -152,6 +195,7 @@ namespace OOTPiSP_labs
             this.PolyLineButton.TabIndex = 2;
             this.PolyLineButton.Text = "Poly line";
             this.PolyLineButton.UseVisualStyleBackColor = true;
+            this.PolyLineButton.Click += new System.EventHandler(this.PolyLineButton_Click);
             // 
             // LineButton
             // 
@@ -161,53 +205,21 @@ namespace OOTPiSP_labs
             this.LineButton.TabIndex = 1;
             this.LineButton.Text = "Line";
             this.LineButton.UseVisualStyleBackColor = true;
-            // 
-            // UndoBtn
-            // 
-            this.UndoBtn.Location = new System.Drawing.Point(39, 288);
-            this.UndoBtn.Name = "UndoBtn";
-            this.UndoBtn.Size = new System.Drawing.Size(50, 50);
-            this.UndoBtn.TabIndex = 12;
-            this.UndoBtn.Text = "Undo";
-            this.UndoBtn.UseVisualStyleBackColor = true;
-            // 
-            // RedoBtn
-            // 
-            this.RedoBtn.Location = new System.Drawing.Point(93, 288);
-            this.RedoBtn.Name = "RedoBtn";
-            this.RedoBtn.Size = new System.Drawing.Size(50, 50);
-            this.RedoBtn.TabIndex = 13;
-            this.RedoBtn.Text = "Redo";
-            this.RedoBtn.UseVisualStyleBackColor = true;
-            // 
-            // SerealizeBtn
-            // 
-            this.SerealizeBtn.Location = new System.Drawing.Point(39, 344);
-            this.SerealizeBtn.Name = "SerealizeBtn";
-            this.SerealizeBtn.Size = new System.Drawing.Size(104, 50);
-            this.SerealizeBtn.TabIndex = 14;
-            this.SerealizeBtn.Text = "Serealize";
-            this.SerealizeBtn.UseVisualStyleBackColor = true;
-            // 
-            // Deserealize
-            // 
-            this.Deserealize.Location = new System.Drawing.Point(41, 400);
-            this.Deserealize.Name = "Deserealize";
-            this.Deserealize.Size = new System.Drawing.Size(104, 50);
-            this.Deserealize.TabIndex = 15;
-            this.Deserealize.Text = "Deserealize";
-            this.Deserealize.UseVisualStyleBackColor = true;
+            this.LineButton.Click += new System.EventHandler(this.LineButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1235, 670);
+            this.ClientSize = new System.Drawing.Size(1235, 630);
             this.Controls.Add(this.panel1);
+            this.DoubleBuffered = true;
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
@@ -235,6 +247,7 @@ namespace OOTPiSP_labs
         private System.Windows.Forms.Button SerealizeBtn;
         private System.Windows.Forms.Button RedoBtn;
         private System.Windows.Forms.Button UndoBtn;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }
 

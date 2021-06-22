@@ -7,8 +7,9 @@ namespace OOTPiSP_labs
     {
         private Point startCoords;
         private Point endCoords;
-
         private Pen myPen;
+        private Brush myBrush;
+        private bool isFill;
 
         public Figure(Color color, float penWidth)
         {
@@ -16,44 +17,40 @@ namespace OOTPiSP_labs
         }
         public Point StartCoords
         {
-            get
-            {
-                return startCoords;
-            }
+            get{return startCoords;}
 
-            set
-            {
-                startCoords = value;
-            }
+            set{startCoords = value;}
         }
 
         public Point EndCoords
         {
-            get
-            {
-                return endCoords;
-            }
+            get{return endCoords;}
 
-            set
-            {
-                endCoords = value;
-            }
+            set{endCoords = value;}
         }
 
         public Pen MyPen
         {
-            get
-            {
-                return myPen;
-            }
+            get{return myPen;}
 
-            set
-            {
-                myPen = value;
-            }
+            set{myPen = value;}
         }
 
+        public Brush MyBrush
+        {
+            get { return myBrush; }
+
+            set { myBrush = value; }
+        }
+
+        public bool IsFill
+        {
+            get { return isFill; }
+
+            set { isFill = value; }
+        }
         public abstract void Paint(Graphics graphics);
+        public abstract Figure Clone();
 
     }
 }
