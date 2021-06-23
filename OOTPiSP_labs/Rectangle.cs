@@ -11,10 +11,9 @@ namespace OOTPiSP_labs
         private int width;
         private int height;
 
-        public Rectangle(Color color, float penWidth, bool isFill, Brush brush) : base(color, penWidth)
+        public Rectangle(Color color, float penWidth, Color fillColor) : base(color, penWidth)
         {
-            this.IsFill = isFill;
-            this.MyBrush = brush;
+            this.MyBrush = new SolidBrush(fillColor);
         }
 
         override public void Paint(Graphics graphics)
@@ -25,16 +24,10 @@ namespace OOTPiSP_labs
             width = Math.Abs(this.StartCoords.X - this.EndCoords.X);//width of rect
             height = Math.Abs(this.StartCoords.Y - this.EndCoords.Y);//height of rect
 
-            if (this.IsFill)
-            {
-                graphics.FillRectangle(this.MyBrush, x, y, width, height);
-            }
-            graphics.DrawRectangle(this.MyPen, x, y, width, height);
-        }
 
-        public override Figure Clone()
-        {
-            return new Rectangle(MyPen.Color, MyPen.Width, this.IsFill, this.MyBrush);
+            graphics.FillRectangle(this.MyBrush, x, y, width, height);
+
+            graphics.DrawRectangle(this.MyPen, x, y, width, height);
         }
     }
 }

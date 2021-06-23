@@ -7,28 +7,43 @@ namespace OOTPiSP_labs
 {
     public class PolyLine : Figure
     {
-        private Point[] points;
-        private int pointCounter;
+        private List<Point> points = new List<Point>();
 
         public PolyLine(Color color, float penWidth) : base(color, penWidth)
         {
-            points[0] = new Point(0, 0);
-            pointCounter = 1;
+            this.MyPen = new Pen(color, penWidth);
         }
 
-        public void AddPoint(Point point)
+        public override Point StartCoords
         {
-            points[pointCounter] = new Point(point.X, point.Y);
-            pointCounter++;
+            get => base.StartCoords;
+
+            set
+            {
+                this.startCoords = value;
+                points.Add(this.startCoords);
+
+                if (points.Count == 1)
+                {
+                    points.Add(this.startCoords);
+                }
+            }
         }
+
+        public override Point EndCoords
+        {
+            get => base.EndCoords;
+
+            set
+            {
+                this.endCoords = value;
+                points[points.Count - 1] = this.endCoords;
+            }
+        }
+
         public override void Paint(Graphics graphics)
         {
-            graphics.DrawLines(this.MyPen, points);
-        }
-
-        public override Figure Clone()
-        {
-            return new PolyLine(MyPen.Color, MyPen.Width);
+            graphics.DrawLines(this.MyPen, points.ToArray());
         }
     }
 }

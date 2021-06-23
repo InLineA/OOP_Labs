@@ -7,9 +7,13 @@ namespace OOTPiSP_labs
     public partial class Form1 : Form
     {
         private bool isFill = false;
+        private Point start;
+        private Point end;
+        private Color fillColor;
         private Pen pen = new Pen(Color.Black, 1);
         private Brush brush = new SolidBrush(Color.White);
-        private Figure figure = new Line(Color.Black, 1);
+        private Figure figure;
+        private CreateInstance create = new LineCreate();
         private Storage storage = new Storage();
         private bool isMouseDown = false;//true due to mouse down event
         private bool isSpace = false;
@@ -20,44 +24,80 @@ namespace OOTPiSP_labs
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (create != null)
             {
-                if (figure != null)
+                if (!isMouseDown && !create.manyClick)
                 {
-                    figure = figure.Clone();
+                    figure = create.Create(pen.Color, pen.Width, fillColor);
 
-                    isMouseDown = true;
+                    isMouseDown = !isMouseDown;
+                    start.X = e.X;
+                    start.Y = e.Y;
 
-                    figure.StartCoords = e.Location;
+                    figure.StartCoords = start;
+                }
+            }
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (create != null)
+            {
+                if (create.manyClick)
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        start.X = e.X;
+                        start.Y = e.Y;
+
+                        if (!isMouseDown)
+                        {
+                            figure = create.Create(pen.Color, pen.Width, fillColor);
+                            figure.StartCoords = start;
+
+                            isMouseDown = !isMouseDown;
+                        }
+                        else
+                        {
+                            figure.StartCoords = start;
+                        }
+                    }
+                    else if (e.Button == MouseButtons.Right)
+                    {
+                        isMouseDown = !isMouseDown;
+                        storage.AddToStorage(figure);
+                    }
                 }
             }
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
+        { 
             if (isMouseDown)
-            {
-                figure.EndCoords = e.Location;
+                {
+                    end.X = e.X;
+                    end.Y = e.Y;
 
-                Refresh();
-            }
+                    figure.EndCoords = end;
+                    Refresh();
+                }
         }
+
+
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (isMouseDown && !create.manyClick)
             {
-                if (isMouseDown)
+                end.X = e.X;
+                end.Y = e.Y;
+                isMouseDown = !isMouseDown;
+                if (start != end)
                 {
-                    if (figure != null)
-                    {
-                        storage.AddToStorage(figure);
-                    }
-
-                    figure = figure.Clone();
-
-                    isMouseDown = false;
+                    figure.EndCoords = end;
+                    storage.AddToStorage(figure);
                 }
+                figure = create.Create(pen.Color, pen.Width, fillColor);
             }
         }
 
@@ -77,44 +117,32 @@ namespace OOTPiSP_labs
         {
             pen.Width = WidthBar.Value + 1;
 
-            figure.MyPen.Width = WidthBar.Value + 1;//overwriting the width
-
-            //TODO Change field with pen width
-            figure = figure.Clone();
+            figure.MyPen.Width = WidthBar.Value + 1;
         }
 
         private void LineButton_Click(object sender, EventArgs e)
         {
-            figure = new Line(pen.Color, pen.Width);
+            create = new LineCreate();
         }
 
         private void PolyLineButton_Click(object sender, EventArgs e)
         {
-            figure = new PolyLine(pen.Color, pen.Width);
+            create = new PolyLCreate();
         }
 
         private void RectangleButton_Click(object sender, EventArgs e)
         {
-            figure = new Rectangle(pen.Color, pen.Width, isFill, brush);
+            create = new RecCreate();
         }
 
         private void EllipseButton_Click(object sender, EventArgs e)
         {
-            figure = new Ellipse(pen.Color, pen.Width, isFill, brush);
+            create = new EllCreate();
         }
 
         private void PolygonButton_Click(object sender, EventArgs e)
         {
-            figure = new Polygon(pen.Color, pen.Width, isFill, brush);
-        }
-
-        private void IsFillBtn_CheckedChanged(object sender, EventArgs e)
-        {
-            isFill = IsFillBtn.Checked;
-
-            figure.IsFill = IsFillBtn.Checked;
-
-            //TODO Change field isFilled
+            create = new PolygonCreate();
         }
 
         private void Color1Btn_Click(object sender, EventArgs e)
@@ -134,21 +162,14 @@ namespace OOTPiSP_labs
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                brush = new SolidBrush(colorDialog1.Color);
+                fillColor = colorDialog1.Color;
                 Color2Btn.BackColor = colorDialog1.Color;
 
-                figure.MyBrush = new SolidBrush(colorDialog1.Color);
 
                 //TODO Change field with brush color
             }
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyValue == (char)Keys.Space)
-            {
-
-            }
-        }
+        
     }
 }

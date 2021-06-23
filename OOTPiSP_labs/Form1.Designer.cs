@@ -36,7 +36,6 @@ namespace OOTPiSP_labs
             this.UndoBtn = new System.Windows.Forms.Button();
             this.WidthLbl = new System.Windows.Forms.Label();
             this.WidthBar = new System.Windows.Forms.TrackBar();
-            this.IsFillBtn = new System.Windows.Forms.CheckBox();
             this.Color2Btn = new System.Windows.Forms.Button();
             this.Color1Btn = new System.Windows.Forms.Button();
             this.PolygonButton = new System.Windows.Forms.Button();
@@ -58,7 +57,6 @@ namespace OOTPiSP_labs
             this.panel1.Controls.Add(this.UndoBtn);
             this.panel1.Controls.Add(this.WidthLbl);
             this.panel1.Controls.Add(this.WidthBar);
-            this.panel1.Controls.Add(this.IsFillBtn);
             this.panel1.Controls.Add(this.Color2Btn);
             this.panel1.Controls.Add(this.Color1Btn);
             this.panel1.Controls.Add(this.PolygonButton);
@@ -125,17 +123,6 @@ namespace OOTPiSP_labs
             this.WidthBar.Size = new System.Drawing.Size(104, 45);
             this.WidthBar.TabIndex = 10;
             this.WidthBar.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
-            // IsFillBtn
-            // 
-            this.IsFillBtn.AutoSize = true;
-            this.IsFillBtn.Location = new System.Drawing.Point(62, 190);
-            this.IsFillBtn.Name = "IsFillBtn";
-            this.IsFillBtn.Size = new System.Drawing.Size(54, 19);
-            this.IsFillBtn.TabIndex = 9;
-            this.IsFillBtn.Text = "Filled";
-            this.IsFillBtn.UseVisualStyleBackColor = true;
-            this.IsFillBtn.CheckedChanged += new System.EventHandler(this.IsFillBtn_CheckedChanged);
             // 
             // Color2Btn
             // 
@@ -219,7 +206,7 @@ namespace OOTPiSP_labs
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
@@ -241,7 +228,6 @@ namespace OOTPiSP_labs
         private System.Windows.Forms.Button PolyLineButton;
         private System.Windows.Forms.Button LineButton;
         private System.Windows.Forms.TrackBar WidthBar;
-        private System.Windows.Forms.CheckBox IsFillBtn;
         private System.Windows.Forms.Label WidthLbl;
         private System.Windows.Forms.Button Deserealize;
         private System.Windows.Forms.Button SerealizeBtn;

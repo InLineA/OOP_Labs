@@ -5,8 +5,8 @@ namespace OOTPiSP_labs
 {
     public abstract class Figure
     {
-        private Point startCoords;
-        private Point endCoords;
+        protected Point startCoords;
+        protected Point endCoords;
         private Pen myPen;
         private Brush myBrush;
         private bool isFill;
@@ -15,14 +15,14 @@ namespace OOTPiSP_labs
         {
             myPen = new Pen(color, penWidth);
         }
-        public Point StartCoords
+        public virtual Point StartCoords
         {
             get{return startCoords;}
 
             set{startCoords = value;}
         }
 
-        public Point EndCoords
+        public virtual Point EndCoords
         {
             get{return endCoords;}
 
@@ -50,7 +50,6 @@ namespace OOTPiSP_labs
             set { isFill = value; }
         }
         public abstract void Paint(Graphics graphics);
-        public abstract Figure Clone();
 
     }
 }

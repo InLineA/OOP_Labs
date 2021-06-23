@@ -9,7 +9,7 @@ namespace OOTPiSP_labs
     {
 
 
-        public Line(Color color, float penWidth) : base(color, penWidth)
+        public Line(Color color, float penWidth) : base(color, penWidth) 
         {
 
         }
@@ -17,11 +17,6 @@ namespace OOTPiSP_labs
         public override void Paint(Graphics graphics)
         {
             graphics.DrawLine(MyPen, StartCoords, EndCoords);
-        }
-
-        public override Figure Clone()
-        {
-            return new Line(MyPen.Color, MyPen.Width);
         }
     }
 }
