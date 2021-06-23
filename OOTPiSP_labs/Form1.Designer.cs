@@ -86,6 +86,7 @@ namespace OOTPiSP_labs
             this.SerealizeBtn.TabIndex = 14;
             this.SerealizeBtn.Text = "Serealize";
             this.SerealizeBtn.UseVisualStyleBackColor = true;
+            this.SerealizeBtn.Click += new System.EventHandler(this.SerealizeBtn_Click);
             // 
             // RedoBtn
             // 
@@ -95,6 +96,7 @@ namespace OOTPiSP_labs
             this.RedoBtn.TabIndex = 13;
             this.RedoBtn.Text = "Redo";
             this.RedoBtn.UseVisualStyleBackColor = true;
+            this.RedoBtn.Click += new System.EventHandler(this.RedoBtn_Click);
             // 
             // UndoBtn
             // 
@@ -104,6 +106,7 @@ namespace OOTPiSP_labs
             this.UndoBtn.TabIndex = 12;
             this.UndoBtn.Text = "Undo";
             this.UndoBtn.UseVisualStyleBackColor = true;
+            this.UndoBtn.Click += new System.EventHandler(this.UndoBtn_Click);
             // 
             // WidthLbl
             // 

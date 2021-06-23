@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Text.Json;
 
 namespace OOTPiSP_labs
 {
@@ -66,6 +67,7 @@ namespace OOTPiSP_labs
                     {
                         isMouseDown = !isMouseDown;
                         storage.AddToStorage(figure);
+                        storage.ResetStack();
                     }
                 }
             }
@@ -96,9 +98,11 @@ namespace OOTPiSP_labs
                 {
                     figure.EndCoords = end;
                     storage.AddToStorage(figure);
+                    storage.ResetStack();
                 }
                 figure = create.Create(pen.Color, pen.Width, fillColor);
             }
+            
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -170,6 +174,22 @@ namespace OOTPiSP_labs
             }
         }
 
-        
+        private void UndoBtn_Click(object sender, EventArgs e)
+        {
+            storage.DeleteFigure();
+            Refresh();
+        }
+
+        private void RedoBtn_Click(object sender, EventArgs e)
+
+        {
+            storage.Redo();
+            Refresh();
+        }
+
+        private void SerealizeBtn_Click(object sender, EventArgs e)
+        {
+            /*var json = JsonSerializer.Serialize(aList);*/
+        }
     }
 }
