@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Drawing;
-
+using System.Runtime.Serialization;
 
 namespace OOTPiSP_labs
 {
+    [DataContract]
     public class Rectangle : Figure
     {
+        [DataMember]
         private int x;
+        [DataMember]
         private int y;
+        [DataMember]
         private int width;
+        [DataMember]
         private int height;
 
         public Rectangle(Color color, float penWidth, Color fillColor) : base(color, penWidth)

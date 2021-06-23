@@ -1,19 +1,26 @@
 ﻿using System.Drawing;
-
+using System.Runtime.Serialization;
 
 namespace OOTPiSP_labs
 {
+    [DataContract]
     public abstract class Figure
     {
+        [DataMember]
         protected Point startCoords;
+        [DataMember]
         protected Point endCoords;
-        private Pen myPen;
+        [DataMember]
+        private Color color;
+        [DataMember]
+        private float penWidth;
+        [DataMember]
         private Brush myBrush;
-        private bool isFill;
 
         public Figure(Color color, float penWidth)
         {
-            myPen = new Pen(color, penWidth);
+            this.color = color;
+            this.penWidth = penWidth;
         }
         public virtual Point StartCoords
         {
@@ -31,9 +38,9 @@ namespace OOTPiSP_labs
 
         public Pen MyPen
         {
-            get{return myPen;}
+            get{return new Pen(color, penWidth);}
 
-            set{myPen = value;}
+            set{color = value.Color; penWidth = value.Width; }
         }
 
         public Brush MyBrush
@@ -41,13 +48,6 @@ namespace OOTPiSP_labs
             get { return myBrush; }
 
             set { myBrush = value; }
-        }
-
-        public bool IsFill
-        {
-            get { return isFill; }
-
-            set { isFill = value; }
         }
         public abstract void Paint(Graphics graphics);
 

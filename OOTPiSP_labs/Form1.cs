@@ -2,22 +2,24 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Text.Json;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace OOTPiSP_labs
 {
     public partial class Form1 : Form
     {
-        private bool isFill = false;
         private Point start;
         private Point end;
         private Color fillColor;
         private Pen pen = new Pen(Color.Black, 1);
         private Brush brush = new SolidBrush(Color.White);
         private Figure figure;
-        private CreateInstance create = new LineCreate();
+        private MyCreateInstance create = new LineCreate();
         private Storage storage = new Storage();
         private bool isMouseDown = false;//true due to mouse down event
-        private bool isSpace = false;
+        private Dictionary<string, Type> pluginDict = new Dictionary<string, Type>();
+
         public Form1()
         {
             InitializeComponent();
@@ -50,6 +52,7 @@ namespace OOTPiSP_labs
                     {
                         start.X = e.X;
                         start.Y = e.Y;
+                        
 
                         if (!isMouseDown)
                         {
@@ -68,6 +71,7 @@ namespace OOTPiSP_labs
                         isMouseDown = !isMouseDown;
                         storage.AddToStorage(figure);
                         storage.ResetStack();
+                        figure = create.Create(pen.Color, pen.Width, fillColor);
                     }
                 }
             }
@@ -189,7 +193,55 @@ namespace OOTPiSP_labs
 
         private void SerealizeBtn_Click(object sender, EventArgs e)
         {
-            /*var json = JsonSerializer.Serialize(aList);*/
+            Serializer serialize = new Serializer();
+            serialize.Serialize(storage);
+        }
+
+        private void Deserealize_Click(object sender, EventArgs e)
+        {
+            Serializer serialize = new Serializer();
+            storage = serialize.Deserialize(storage);
+            Refresh();
+        }
+
+        private void AddPlugin_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog
+            {
+                Filter = @"File DLL (*.dll)|*.dll"
+            };
+
+            try
+            {
+                if (openFile.ShowDialog() == DialogResult.OK)
+                {
+
+                    Assembly plugin = Assembly.LoadFrom(openFile.FileName);
+                    Type[] types = plugin.GetTypes();
+
+                    foreach (Type type in types)
+                    {
+                        if (typeof(MyCreateInstance).IsAssignableFrom(type))
+                        {
+                            var temp = (MyCreateInstance)Activator.CreateInstance(type);
+                            pluginDict.Add(temp.name, type);
+
+                            comboBox1.Items.Add(temp.name);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string pluginName = comboBox1.GetItemText(comboBox1.SelectedItem);
+            create = (MyCreateInstance)Activator.CreateInstance(pluginDict[pluginName]);
         }
     }
 }

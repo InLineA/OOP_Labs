@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Drawing;
-
+using System.Runtime.Serialization;
 
 namespace OOTPiSP_labs
 {
+    [DataContract]
     public class Ellipse : Figure
     {
+        [DataMember]
         private int x;
+        [DataMember]
         private int y;
+        [DataMember]
         private int width;
+        [DataMember]
         private int height;
+
 
         public Ellipse(float penWidth, Color color, Color fillColor) : base(color, penWidth)
         {

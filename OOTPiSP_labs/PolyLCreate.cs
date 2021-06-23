@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
+﻿using System.Drawing;
+using System.Runtime.Serialization;
+
 
 namespace OOTPiSP_labs
 {
-    public class PolyLCreate : CreateInstance
+    [DataContract]
+    public class PolyLCreate : MyCreateInstance
     {
         public Figure Create(Color color, float penWidth, Color colorFill)
         {
             return new PolyLine(color, penWidth);
         }
         public bool manyClick { get { return true; } }
+        public string name { get { return "PolyLine"; } }
     }
 }
