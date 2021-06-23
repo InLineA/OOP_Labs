@@ -193,6 +193,7 @@ namespace OOTPiSP_labs
 
         private void SerealizeBtn_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             Serializer serialize = new Serializer();
             serialize.Serialize(storage);
         }
@@ -242,6 +243,9 @@ namespace OOTPiSP_labs
         {
             string pluginName = comboBox1.GetItemText(comboBox1.SelectedItem);
             create = (MyCreateInstance)Activator.CreateInstance(pluginDict[pluginName]);
+=======
+            
+>>>>>>> 99eeaec9bb2e5f9015b19f123914b6865aa32e2d
         }
     }
 }

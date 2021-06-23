@@ -11,9 +11,13 @@ namespace OOTPiSP_labs
         [DataMember]
         protected Point endCoords;
         [DataMember]
+<<<<<<< HEAD
         private Color color;
         [DataMember]
         private float penWidth;
+=======
+        private Pen myPen;
+>>>>>>> 99eeaec9bb2e5f9015b19f123914b6865aa32e2d
         [DataMember]
         private Brush myBrush;
 
