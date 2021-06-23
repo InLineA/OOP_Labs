@@ -7,7 +7,6 @@ namespace OOTPiSP_labs
 {
     public partial class Form1 : Form
     {
-        private bool isFill = false;
         private Point start;
         private Point end;
         private Color fillColor;
@@ -189,7 +188,7 @@ namespace OOTPiSP_labs
 
         private void SerealizeBtn_Click(object sender, EventArgs e)
         {
-            /*var json = JsonSerializer.Serialize(aList);*/
+            
         }
     }
 }

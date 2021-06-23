@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace OOTPiSP_labs
 {
+    [DataContract]
     class Storage
     {
+        [DataMember]
         private List<Figure> figureList;
+        [DataMember]
         private Stack<Figure> figureStack; 
 
         public Storage()

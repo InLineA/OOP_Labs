@@ -2,11 +2,14 @@
 
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.Serialization;
 
 namespace OOTPiSP_labs
 {
+    [DataContract]
     public class Polygon : Figure
     {
+        [DataMember]
         private List<Point> points = new List<Point>();
 
         public Polygon(Color color, float penWidth, Color fillColor):base(color, penWidth)

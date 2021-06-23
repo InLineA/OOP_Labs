@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
+﻿using System.Drawing;
+using System.Runtime.Serialization;
+
 
 namespace OOTPiSP_labs
 {
+    [DataContract]
     public class PolyLCreate : CreateInstance
     {
         public Figure Create(Color color, float penWidth, Color colorFill)

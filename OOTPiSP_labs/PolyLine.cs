@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace OOTPiSP_labs
 {
+    [DataContract]
     public class PolyLine : Figure
     {
+        [DataMember]
         private List<Point> points = new List<Point>();
 
         public PolyLine(Color color, float penWidth) : base(color, penWidth)
